@@ -63,7 +63,7 @@
 
   - name: get the categories count
     ansible.builtin.command:  mongo --host mongodb.devops1.website --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
-      register: product_count
+    register: product_count
 
   # - name: print the count
   #   ansible.builtin.debug:
@@ -71,7 +71,7 @@
 
   - name: load catalogue data
     ansible.builtin.command: mongo --host mongodb.devops1.website < /app/schema/catalogue.js
-      when: product_count.stdout == "0" # keep double quotes
+    when: product_count.stdout == "0" # keep double quotes
 
   - name: start and enable catalogue
     ansible.builtin.service:
